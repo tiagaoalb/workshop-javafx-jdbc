@@ -31,21 +31,21 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void onMenuItemDepartmentAction() {
-        System.out.println("onMenuItemDepartmentAction");
+        loadView("/com/javafx/workshopjavafxjdbc/DepartmentList.fxml");
     }
 
     @FXML
     public void onMenuItemAboutAction() {
-        loadView();
+        loadView("/com/javafx/workshopjavafxjdbc/About.fxml");
     }
 
     @Override
     public void initialize(URL uri, ResourceBundle resources) {
     }
 
-    private synchronized void loadView() {
+    private synchronized void loadView(String absoluteName) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/workshopjavafxjdbc/About.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVbox = loader.load();
 
             Scene mainScene = Main.getMainScene();
