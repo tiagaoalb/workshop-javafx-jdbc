@@ -2,6 +2,7 @@ module com.javafx.workshopjavafxjdbc {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
+    requires java.sql;
 
 
     opens com.javafx.workshopjavafxjdbc to javafx.fxml;
