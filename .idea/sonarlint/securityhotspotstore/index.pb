@@ -23,7 +23,8 @@ Qsrc/main/java/com/javafx/workshopjavafxjdbc/model/services/DepartmentService.ja
 Msrc/main/java/com/javafx/workshopjavafxjdbc/listeners/DataChangeListener.java,2/1/21b09565c92815bd95bd9d09f06f2d95631302c7
 y
 Isrc/main/java/com/javafx/workshopjavafxjdbc/DepartmentFormController.java,a/d/adfa6eca03690678afce621f092aa42b90517dc3
-„
-Tsrc/main/java/com/javafx/workshopjavafxjdbc/model/exception/ValidationException.java,d/3/d3f804d0810bc991a629a5e4f20c691e48310db4
 …
 Usrc/main/java/com/javafx/workshopjavafxjdbc/model/exceptions/ValidationException.java,0/4/04d18a8162ae32223d73aa6aa187dd9403a0130a
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
