@@ -2,9 +2,9 @@ package com.javafx.workshopjavafxjdbc;
 
 import com.javafx.workshopjavafxjdbc.db.DbException;
 import com.javafx.workshopjavafxjdbc.listeners.DataChangeListener;
-import com.javafx.workshopjavafxjdbc.model.entities.Department;
+import com.javafx.workshopjavafxjdbc.model.entities.Seller;
 import com.javafx.workshopjavafxjdbc.model.exceptions.ValidationException;
-import com.javafx.workshopjavafxjdbc.model.services.DepartmentService;
+import com.javafx.workshopjavafxjdbc.model.services.SellerService;
 import com.javafx.workshopjavafxjdbc.util.Alerts;
 import com.javafx.workshopjavafxjdbc.util.Constraints;
 import com.javafx.workshopjavafxjdbc.util.Utils;
@@ -20,13 +20,13 @@ import lombok.Setter;
 import java.net.URL;
 import java.util.*;
 
-public class DepartmentFormController implements Initializable {
+public class SellerFormController implements Initializable {
 
     @Setter
-    private Department entity;
+    private Seller entity;
 
     @Setter
-    private DepartmentService service;
+    private SellerService service;
 
     private final List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
@@ -75,8 +75,8 @@ public class DepartmentFormController implements Initializable {
         }
     }
 
-    private Department getFormData() {
-        Department obj = new Department();
+    private Seller getFormData() {
+        Seller obj = new Seller();
 
         ValidationException exception = new ValidationException("Validation error");
 
