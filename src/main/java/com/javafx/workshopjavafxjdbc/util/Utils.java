@@ -6,6 +6,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -53,7 +54,7 @@ public class Utils {
                     setText(null);
                 } else {
                     Locale.setDefault(Locale.US);
-                    setText(String.format("%." + decimalPlaces + "f", item));
+                    setText(String.valueOf(BigDecimal.valueOf(item).setScale(decimalPlaces)));
                 }
             }
         });
