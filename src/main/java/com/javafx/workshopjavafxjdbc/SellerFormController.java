@@ -20,11 +20,20 @@ import javafx.util.Callback;
 import lombok.Setter;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
 public class SellerFormController implements Initializable {
+
+    private static final String NAME_FIELD = "name";
+
+    private static final String EMAIL_FIELD = "email";
+
+    private static final String BASE_SALARY_FIELD = "baseSalary";
+
+    private static final String BIRTH_DATE_FIELD = "birthDate";
 
     @Setter
     private Seller entity;
@@ -71,8 +80,6 @@ public class SellerFormController implements Initializable {
     @FXML
     private Button btCancel;
 
-    private ObservableList<Department> observableList;
-
     public void setServices(SellerService service, DepartmentService departmentService) {
         this.service = service;
         this.departmentService = departmentService;
@@ -115,10 +122,31 @@ public class SellerFormController implements Initializable {
 
         obj.setId(Utils.tryParseToInt(txtId.getText()));
 
-        if (txtName.getText() == null || txtName.getText().trim().equals("")) {
-            exception.addError("name", "Field can't be empty");
+        String fieldErrorMsg = "Field can't be empty";
+
+        if (txtName.getText() == null || txtName.getText().trim().isEmpty()) {
+            exception.addError(NAME_FIELD, fieldErrorMsg);
         }
         obj.setName(txtName.getText());
+
+        if (txtEmail.getText() == null || txtEmail.getText().trim().isEmpty()) {
+            exception.addError(EMAIL_FIELD, fieldErrorMsg);
+        }
+        obj.setEmail(txtEmail.getText());
+
+        if (dpBirthDate.getValue() == null) {
+            exception.addError(BIRTH_DATE_FIELD, fieldErrorMsg);
+        } else {
+            Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+            obj.setBirthDate(Date.from(instant));
+        }
+
+        if (txtBaseSalary.getText() == null || txtBaseSalary.getText().trim().isEmpty()) {
+            exception.addError(BASE_SALARY_FIELD, fieldErrorMsg);
+        }
+        obj.setBaseSalary(Utils.tryParseToDouble(txtBaseSalary.getText()));
+
+        obj.setDepartment(comboBoxDepartment.getValue());
 
         if (!exception.getErrors().isEmpty()) {
             throw exception;
@@ -172,16 +200,17 @@ public class SellerFormController implements Initializable {
             throw new IllegalStateException("DepartmentService is null");
         }
         List<Department> list = departmentService.findAll();
-        observableList = FXCollections.observableArrayList(list);
+        ObservableList<Department> observableList = FXCollections.observableArrayList(list);
         comboBoxDepartment.setItems(observableList);
     }
 
     private void setErrorMessages(Map<String, String> errors) {
         Set<String> fields = errors.keySet();
 
-        if (fields.contains("name")) {
-            labelErrorName.setText(errors.get("name"));
-        }
+        labelErrorName.setText(fields.contains(NAME_FIELD) ? errors.get(NAME_FIELD) : "");
+        labelErrorEmail.setText(fields.contains(EMAIL_FIELD) ? errors.get(EMAIL_FIELD) : "");
+        labelErrorBaseSalary.setText(fields.contains(BASE_SALARY_FIELD) ? errors.get(BASE_SALARY_FIELD) : "");
+        labelErrorBirthDate.setText(fields.contains(BIRTH_DATE_FIELD) ? errors.get(BIRTH_DATE_FIELD) : "");
     }
 
     private void initializeComboBoxDepartment() {
